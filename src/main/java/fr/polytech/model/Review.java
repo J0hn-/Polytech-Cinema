@@ -12,18 +12,24 @@ import java.sql.Date;
 public class Review {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonManagedReference
     @Column(name = "review_id", nullable = false)
     private Long id;
 
     @Column(name = "creation", nullable = false)
+    @JsonManagedReference
     private Date creation;
 
     @Column(name = "rating", nullable = true)
+    @JsonManagedReference
     private Byte rating;
 
+    @JsonManagedReference
     private String comment;
 
     @Column(name = "author", nullable = true, length = 25)
+    @JsonManagedReference
     private String author;
 
     @ManyToOne(fetch = FetchType.LAZY)

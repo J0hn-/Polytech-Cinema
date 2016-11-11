@@ -13,16 +13,21 @@ import java.util.Collection;
 public class Movie {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "movie_id", nullable = false)
+    @JsonManagedReference
     private Long id;
 
     @Column(name = "title", nullable = false, length = 30)
+    @JsonManagedReference
     private String title;
 
     @Column(name = "duration", nullable = false)
+    @JsonManagedReference
     private short duration;
 
     @Column(name = "release_date", nullable = false)
+    @JsonManagedReference
     private Date releaseDate;
 
     @ManyToOne(fetch = FetchType.LAZY)

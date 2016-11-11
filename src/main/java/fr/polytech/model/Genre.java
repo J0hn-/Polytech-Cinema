@@ -12,6 +12,7 @@ import java.util.Collection;
 public class Genre {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "genre_id", nullable = false)
     @JsonManagedReference
     private Long id;

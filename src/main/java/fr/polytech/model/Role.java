@@ -12,9 +12,11 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonManagedReference
     private Long id;
 
     @Column(name = "name", nullable = false, length = 30)
+    @JsonManagedReference
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
