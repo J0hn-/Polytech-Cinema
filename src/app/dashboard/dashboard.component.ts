@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Film } from '../film/film';
+import { FilmService } from '../film/film.service';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -7,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+    films: Film[] = []
 
-  ngOnInit() {
+  constructor(private filmService: FilmService) { }
+
+  ngOnInit(): void {
+      this.filmService.getFilms()
+      .then(films => this.films = films.slice(0,4));
   }
 
 }
