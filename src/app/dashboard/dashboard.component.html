@@ -1,0 +1,26 @@
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="display-3">Bienvenue sur Polytech Cinema !</h1>
+    <p>Vous trouverez sur cette page tout nos films !</p>
+    <p><button class="btn btn-primary btn-lg" role="button"
+    (click)="gotoAdd()">Add a movie</button></p>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Example row of columns -->
+  <div class="row">
+    <div class="col-md-6" *ngFor="let film of films">
+      <h2>{{film.title}}</h2>
+      <img src="../assets/rogue_one.jpg" class="col-xs-12 img-responsive">
+      <p *ngIf="film.releaseDate">Release date: {{film.releaseDate}}</p>
+      <p *ngIf="film.duration">Duration: {{film.duration}} minutes</p>
+      <p *ngIf="film.director">Director: {{film.director.first_name}} {{film.director.last_name}}</p>
+      <p *ngIf="film.genre">Genre: {{film.genre.title}}</p>
+      <p>
+          <button class="btn btn-secondary" role="button"
+          (click)="gotoDetail(film.id)">Edit</button>
+      </p>
+    </div>
+  </div>

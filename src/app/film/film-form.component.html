@@ -1,0 +1,38 @@
+<div class="container">
+    <h1>Film Form</h1>
+    <form (ngSubmit)="onSubmit(formGroupFilm.valid)" [formGroup]="formGroupFilm" id="form">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" required
+        formControlName="title">
+      </div>
+      <div class="form-group">
+        <label for="duration">Duration</label>
+        <input type="number" class="form-control" id="duration"
+        formControlName="duration">
+      </div>
+      <div class="form-group">
+        <label for="release_date">Release date</label>
+        <input type="text" class="form-control" id="release_date"
+        formControlName="release_date">
+      </div>
+      <div *ngIf="directors" class="form-group">
+          <label for="director">Director</label>
+           <select id="director" formControlName="director" class="form-control">
+               <option  *ngFor="let director of directors" [value]="director.id">
+                   {{director.first_name}} {{director.last_name}}
+               </option>
+           </select>
+       </div>
+
+       <div *ngIf="genres" class="form-group">
+           <label for="genre">Genre</label>
+           <select id="genre" formControlName="genre" class="form-control">
+               <option *ngFor="let genre of genres" [value]="genre.id">
+                   {{genre.title}}
+               </option>
+           </select>
+</div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>
