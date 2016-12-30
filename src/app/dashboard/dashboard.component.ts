@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Film } from '../film/film';
 import { FilmService } from '../film/film.service';
@@ -12,11 +13,21 @@ export class DashboardComponent implements OnInit {
 
     films: Film[] = []
 
-  constructor(private filmService: FilmService) { }
+  constructor(
+      private router: Router,
+      private filmService: FilmService) { }
 
   ngOnInit(): void {
       this.filmService.getFilms()
-      .then(films => this.films = films.slice(0,4));
+      .then(films => this.films = films);
   }
+
+    gotoDetail(id : number): void {
+      this.router.navigate(['/movie/detail', id]);
+    }
+
+    gotoAdd(): void {
+      this.router.navigate(['/movie/add']);
+    }
 
 }

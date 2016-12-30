@@ -2,7 +2,6 @@ import { Film } from "../film/film";
 
 export class Director {
     public id: number;
-    public firstName: string;
-    public lastName: number;
-    public films: Film[];
+    public first_name: string;
+    public last_name: number;
 }

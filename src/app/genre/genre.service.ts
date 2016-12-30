@@ -4,11 +4,11 @@ import { Headers, Http, Response, URLSearchParams } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Film } from './film';
+import { Genre } from './genre';
 
 @Injectable()
-export class FilmService {
-    private filmsUrl = 'http://localhost/movies';
+export class GenreService {
+    private genresUrl = 'http://localhost/genres';
 
     private handleError(error: any): Promise<any> {
       console.error('An error occurred', error); // for demo purposes only
@@ -20,28 +20,24 @@ export class FilmService {
     private headers = new Headers({'Content-Type': 'application/json'});
     private headersBis =  new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
 
-    private toForm(film: Film): string {
+    private toForm(genre: Genre): string {
         let urlSearchParams = new URLSearchParams();
-        urlSearchParams.append('title', film.title);
-        urlSearchParams.append('duration', film.duration.toString());
-        urlSearchParams.append('release_date', film.release_date);
-        urlSearchParams.append('director', film.director ? film.director.id.toString():null);
-        urlSearchParams.append('genre', film.genre ? film.genre.id.toString():null);
+        urlSearchParams.append('title', genre.title);
         return urlSearchParams.toString()
     }
 
-    update(film: Film): Promise<Film> {
-      const url = `${this.filmsUrl}/${film.id}`;
+    update(genre: Genre): Promise<Genre> {
+      const url = `${this.genresUrl}/${genre.id}`;
       return this.http
-        .put(url, this.toForm(film), {headers: this.headersBis})
+        .put(url, this.toForm(genre), {headers: this.headersBis})
         .toPromise()
-        .then(() => film)
+        .then(() => genre)
         .catch(this.handleError);
     }
 
-    create(film: Film): Promise<Film> {
+    create(genre: Genre): Promise<Genre> {
         return this.http
-            .post(this.filmsUrl, this.toForm(film),
+            .post(this.genresUrl, this.toForm(genre),
             {headers: this.headersBis})
             .toPromise()
             .then(res => res.json())
@@ -49,22 +45,22 @@ export class FilmService {
     }
 
     delete(id: number): Promise<void> {
-      const url = `${this.filmsUrl}/${id}`;
+      const url = `${this.genresUrl}/${id}`;
       return this.http.delete(url, {headers: this.headers})
         .toPromise()
         .then(() => null)
         .catch(this.handleError);
     }
 
-    getFilms(): Promise<Film[]> {
-        return this.http.get(this.filmsUrl)
+    getGenres(): Promise<Genre[]> {
+        return this.http.get(this.genresUrl)
         .toPromise()
-        .then(response => response.json() as Film[])
+        .then(response => response.json() as Genre[])
         .catch(this.handleError);
     }
 
-    getFilm(id: number): Promise<Film> {
-        return this.getFilms()
-            .then(films => films.find(film => film.id === id));
+    getGenre(id: number): Promise<Genre> {
+        return this.getGenres()
+            .then(genres => genres.find(genre => genre.id === id));
     }
 }

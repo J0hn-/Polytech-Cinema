@@ -2,7 +2,7 @@ import './rxjs-extensions';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
@@ -10,10 +10,14 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FilmComponent } from './film/film.component';
+
+import { FilmFormComponent } from './film/film-form.component';
+
 import { FilmService }      from './film/film.service';
 import { DirectorComponent } from './director/director.component';
 import { DirectorService } from './director/director.service';
 import { GenreComponent } from './genre/genre.component';
+import { GenreService } from './genre/genre.service';
 import { ActorComponent } from './actor/actor.component';
 import { ActorService } from './actor/actor.service';
 
@@ -22,6 +26,7 @@ import { ActorService } from './actor/actor.service';
     AppComponent,
     DashboardComponent,
     FilmComponent,
+    FilmFormComponent,
     DirectorComponent,
     GenreComponent,
     ActorComponent
@@ -30,7 +35,8 @@ import { ActorService } from './actor/actor.service';
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [
       FilmService,

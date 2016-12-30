@@ -2,13 +2,13 @@ import { Observable } from "rxjs";
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 
-import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/map';
 
 import { Director } from './director';
 
 @Injectable()
 export class DirectorService {
-    private directorsUrl = 'http://localhost:8080/directors';
+    private directorsUrl = 'http://localhost/directors';
 
     private handleError(error: any): Promise<any> {
       console.error('An error occurred', error); // for demo purposes only
@@ -45,15 +45,13 @@ export class DirectorService {
         .catch(this.handleError);
     }
 
-    getDirectors(): Promise<Director[]> {
+    getDirectors(): Observable<Director[]> {
         return this.http.get(this.directorsUrl)
-        .toPromise()
-        .then(response => response.json()._embedded.movies as Director[])
-        .catch(this.handleError);
+        .map((response: Response) => <Director[]> response.json());
     }
 
-    getDirector(id: number): Promise<Director> {
-        return this.getDirectors()
-            .then(directors => directors.find(director => director.id === id));
+    getDirector(id: number): Observable<Director> {
+        return this.http.get(this.directorsUrl + id)
+        .map((response: Response) => <Director> response.json());
     }
 }

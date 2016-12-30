@@ -5,7 +5,7 @@ export class Film {
     public id: number;
     public title: string;
     public duration: number;
-    public releaseDate: string;
+    public release_date: string;
     public director: Director;
     public genre: Genre;
 }
