@@ -11,7 +11,7 @@
 <div class="container">
   <!-- Example row of columns -->
   <div class="row">
-    <div class="col-md-6" *ngFor="let film of films">
+    <div class="col-xs-6 col-md-4 col-lg-3" *ngFor="let film of films">
       <h2>{{film.title}}</h2>
       <img src="../assets/rogue_one.jpg" class="col-xs-12 img-responsive">
       <p *ngIf="film.releaseDate">Release date: {{film.releaseDate}}</p>
