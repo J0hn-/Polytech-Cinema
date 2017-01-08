@@ -1,3 +1,23 @@
-<p>
-  genre works!
-</p>
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+  <div class="container">
+    <p>Vous trouverez sur cette page tout nos genres de films !</p>
+    <p><button class="btn btn-primary btn-lg" role="button"
+    (click)="gotoAdd()">Add a genre</button></p>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Example row of columns -->
+  <table class="table table-striped">
+      <tbody>
+        <tr *ngFor="let genre of genres">
+          <td>{{genre.title}}</td>
+          <td>
+              <button class="btn btn-secondary" role="button"
+              (click)="gotoDetail(genre.id)">Edit</button>
+          </td>
+      </tr>
+    </tbody>
+</table>
+  </div>

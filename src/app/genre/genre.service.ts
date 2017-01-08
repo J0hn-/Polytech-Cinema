@@ -52,15 +52,13 @@ export class GenreService {
         .catch(this.handleError);
     }
 
-    getGenres(): Promise<Genre[]> {
+    getGenres(): Observable<Genre[]> {
         return this.http.get(this.genresUrl)
-        .toPromise()
-        .then(response => response.json() as Genre[])
-        .catch(this.handleError);
+        .map((response: Response) => <Genre[]> response.json());
     }
 
-    getGenre(id: number): Promise<Genre> {
-        return this.getGenres()
-            .then(genres => genres.find(genre => genre.id === id));
+    getGenre(id: number): Observable<Genre> {
+        return this.http.get(`${this.genresUrl}/${id}`)
+        .map((response: Response) => <Genre> response.json());
     }
 }

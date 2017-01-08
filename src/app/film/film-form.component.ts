@@ -44,7 +44,9 @@ export class FilmFormComponent implements OnInit {
 
        this.genreService
            .getGenres()
-           .then((data: Genre[]) => this.genres = data);
+           .subscribe((data: Genre[]) => this.genres = data,
+            error => console.log(error),
+            () => console.log(this.directors));
 
         this.buildForm();
     };
@@ -83,9 +85,10 @@ export class FilmFormComponent implements OnInit {
         console.log(this.formGroupFilm.value);
         this.filmService
             .create(this.formGroupFilm.value)
-            .then(
-                (film: Film) => this.film = film
-            );
+            .then((res) => {
+                console.log(res);
+                this.router.navigateByUrl('/dashboard');
+            });
     }
 
     private editFilm(): void {

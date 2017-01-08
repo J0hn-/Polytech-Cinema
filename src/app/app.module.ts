@@ -12,6 +12,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FilmComponent } from './film/film.component';
 
 import { FilmFormComponent } from './film/film-form.component';
+import { DirectorFormComponent } from './director/director-form.component';
+import { GenreFormComponent } from './genre/genre-form.component';
 
 import { FilmService }      from './film/film.service';
 import { DirectorComponent } from './director/director.component';
@@ -27,6 +29,8 @@ import { ActorService } from './actor/actor.service';
     DashboardComponent,
     FilmComponent,
     FilmFormComponent,
+    DirectorFormComponent,
+    GenreFormComponent,
     DirectorComponent,
     GenreComponent,
     ActorComponent
@@ -41,7 +45,8 @@ import { ActorService } from './actor/actor.service';
   providers: [
       FilmService,
       ActorService,
-      DirectorService
+      DirectorService,
+      GenreService
   ],
   bootstrap: [AppComponent]
 })

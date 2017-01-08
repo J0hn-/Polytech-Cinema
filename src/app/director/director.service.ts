@@ -1,6 +1,6 @@
 import { Observable } from "rxjs";
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
+import { Headers, Http, Response, URLSearchParams } from '@angular/http';
 
 import 'rxjs/add/operator/map';
 
@@ -18,20 +18,28 @@ export class DirectorService {
     constructor(private http: Http) { }
 
     private headers = new Headers({'Content-Type': 'application/json'});
+    private headersBis =  new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
+
+    private toForm(director: Director): string {
+        let urlSearchParams = new URLSearchParams();
+        urlSearchParams.append('first_name', director.first_name);
+        urlSearchParams.append('last_name', director.last_name);
+        return urlSearchParams.toString()
+    }
 
     update(director: Director): Promise<Director> {
       const url = `${this.directorsUrl}/${director.id}`;
       return this.http
-        .put(url, JSON.stringify(director), {headers: this.headers})
+        .put(url, this.toForm(director), {headers: this.headersBis})
         .toPromise()
         .then(() => director)
         .catch(this.handleError);
     }
 
-    create(name: string): Promise<Director> {
+    create(director: Director): Promise<Director> {
         return this.http
-            .post(this.directorsUrl, JSON.stringify({name: name}),
-            {headers: this.headers})
+            .post(this.directorsUrl, this.toForm(director),
+            {headers: this.headersBis})
             .toPromise()
             .then(res => res.json().data)
             .catch(this.handleError);
@@ -51,7 +59,7 @@ export class DirectorService {
     }
 
     getDirector(id: number): Observable<Director> {
-        return this.http.get(this.directorsUrl + id)
+        return this.http.get(`${this.directorsUrl}/${id}`)
         .map((response: Response) => <Director> response.json());
     }
 }

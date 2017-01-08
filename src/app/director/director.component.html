@@ -1,3 +1,23 @@
-<p>
-  director works!
-</p>
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+  <div class="container">
+    <p>Vous trouverez sur cette page tout nos réalisateurs !</p>
+    <p><button class="btn btn-primary btn-lg" role="button"
+    (click)="gotoAdd()">Add a director</button></p>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Example row of columns -->
+  <table class="table table-striped">
+      <tbody>
+          <tr *ngFor="let director of directors">
+              <td>{{director.first_name}} {{director.last_name}}</td>
+              <td>
+                  <button class="btn btn-secondary" role="button"
+                  (click)="gotoDetail(director.id)">Edit</button>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>
